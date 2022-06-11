@@ -12,8 +12,8 @@ function OurApp() {
     return (
     <> 
         <OurHeader />
-        <LikeArea />
         <TimeArea />
+        <LikeArea />
        
         <ul>
  {pets.map(pet => <Pet name = {pet.name} species = {pet.species} age = {pet.age} key = {pet.id} /> )}
@@ -24,33 +24,28 @@ function OurApp() {
 }
 
 function LikeArea() {
-  const [likeCount, setLikeCount] = useState(0)
-  function increaseLikeHandler() {
-       setLikeCount(function(prev){
-          return prev + 1
-       })
-  }
+  const [value, modifier] = useState(0)
   
-  function decreaseLikeHandler() {
-       setLikeCount(prev => {
-           if(prev > 0) {
-              return prev - 1;
-           } 
-         
-         return 0;
-       })
+  increaseHandler = () => {
+       modifier( prev => prev + 1)
   }
-
-    return (
-        <>
-        <button onClick = {increaseLikeHandler}>Increase Likes</button>
-        <button onClick = {decreaseLikeHandler}>Decrease Likes</button>
-        <h2>this page has been liked {likeCount} times</h2>
-        </>
-    )
+  decreaseHandler = () => {
+      modifier(prev => {
+          if(prev > 0) {
+              return prev - 1
+          }
+         return 0
+      })
+  }
+     return (
+       <>
+           <button onClick = {increaseHandler}>Like</button>
+           <button onClick = {decreaseHandler}>Dislike</button>
+           <h1>Page Has Been Liked {value} Times</h1>
+      </>
+       
+     )
 }
-
-
 
 function Pet(props) {
      return (
