@@ -1,3 +1,5 @@
+const useState = React.useState
+
 const pets = [
   { name: "Meowsalot", species: "cat", age: "5", id: 123456789 },
   { name: "Barksalot", species: "dog", age: "3", id: 987654321 },
@@ -32,12 +34,14 @@ function OurHeader() {
    return (<h1 className = "special">Our Amazing React JSX App</h1>)
 }
 function TimeArea() {
-   return (<p>The Current time is {new Date().toLocaleString()}</p>)
+   const [theTime, setTheTime] = useState(new Date().toLocaleString())
+   setTimeout(function() {
+      setTheTime(new Date().toLocaleString())
+   },5000)
+   return <p>The Current time is {theTime}</p>
 }
 function Footer() {
    return (<small>Copyright Footer Text</small>)
 }
 
-setInterval(() => {
 ReactDOM.render(<OurApp />, document.querySelector('#app'));
-}, 1000)
