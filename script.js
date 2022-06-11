@@ -17,7 +17,7 @@ function OurApp() {
         <LikeArea />
         <AddPetForm setPets = {setPets} />
         <ul>
- {pets.map(pet => <Pet name = {pet.name} species = {pet.species} age = {pet.age} key = {pet.id} /> )}
+ {pets.map(pet => <Pet setPets = {setPets} id = {pet.id} name = {pet.name} species = {pet.species} age = {pet.age} key = {pet.id} /> )}
         </ul>
         <Footer />
     </>
@@ -75,9 +75,14 @@ function LikeArea() {
 }
 
 function Pet(props) {
+  function handleDelete() {
+      props.setPets(prev => prev.filter(pet => pet.id != props.id))
+  }
      return (
        <>
-       <li>I'm  {props.name} a {props.work} of age {props.age}</li>
+       <li>I'm  {props.name} a {props.work} of age {props.age}
+         <button onClick = {handleDelete}> Delete </button>  
+       </li>
        </>
      )
 }
