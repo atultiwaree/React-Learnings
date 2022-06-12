@@ -99,9 +99,12 @@ function OurHeader() {
 }
 function TimeArea() {
    const [theTime, setTheTime] = useState(new Date().toLocaleString())
-   setTimeout(function() {
-      setTheTime(new Date().toLocaleString())
-   },5000)
+   
+   useEffect(() => {
+    const interVal = setInterval(() => setTheTime(new Date().toLocaleString()), 1000)
+    return () => clearInterval(interVal)
+   }, [])
+  
    return <p>The Current time is {theTime}</p>
 }
 function Footer() {
